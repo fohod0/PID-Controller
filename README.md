@@ -82,7 +82,7 @@ Input your new target speed: 60
 The steady-state acceleration of about 1.52 km/h/s is exactly what's needed to cancel out drag and rolling resistance at 60 km/h.
 
 ## Key Challenges
-The main challenge was the car overshooting its target massively which was down to a simple logic error within the code, if(!((accel > 8 && error > 0) || (accel < 0 && error < 0))), requiring a change from an OR statement to an AND statement for accel > 8 && error > 0 and accel < 0 && error < 0, despite the fact that it was a tiny bug it took the longest time to catch.
+The main challenge was the car massively overshooting its target. It came down to a small logic error in the anti-windup condition: each pair of checks used OR instead of AND. The fix was `(accel > 8 && error > 0) || (accel < 0 && error < 0)`. Despite being a tiny bug, it took the longest to find.
 
 ## Licence
 MIT. See [LICENSE](LICENSE).
